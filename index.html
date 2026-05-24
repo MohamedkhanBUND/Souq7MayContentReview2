@@ -3,838 +3,310 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سوق ٧ — مراجعة محتوى مايو ٢٠٢٦</title>
+<title>سوق ٧ - مراجعة محتوى مايو ٢٠٢٦</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #0A0A0A;
-    --white: #FFFFFF;
-    --gray: #F5F5F5;
-    --mid: #888888;
-    --border: #E0E0E0;
-    --accent: #111111;
-    --green: #1A6B2A;
-    --green-light: #E8F5EC;
-    --red: #8B1A1A;
-    --red-light: #FDEAEA;
-    --orange: #E67E22;
-    --orange-light: #FEF3E8;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Tajawal', sans-serif;
-    background: var(--gray);
-    color: var(--black);
-    min-height: 100vh;
-    direction: rtl;
-  }
-
-  /* HEADER */
-  .header {
-    background: var(--black);
-    color: var(--white);
-    padding: 32px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-  }
-  .header-brand { display: flex; align-items: center; gap: 16px; }
-  .header-logo {
-    width: 48px; height: 48px;
-    background: white;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 18px; color: var(--black);
-  }
-  .header-title h1 { font-size: 20px; font-weight: 700; }
-  .header-title p { font-size: 13px; color: #aaa; margin-top: 2px; }
-  .header-stats {
-    display: flex; gap: 24px; align-items: center;
-  }
-  .stat { text-align: center; }
-  .stat-num { font-size: 24px; font-weight: 800; color: white; }
-  .stat-label { font-size: 11px; color: #888; margin-top: 2px; }
-  .stat-approved { color: #4CAF50; }
-  .stat-pending { color: #FF9800; }
-
-  /* PROGRESS BAR */
-  .progress-bar-wrap {
-    background: #1a1a1a;
-    padding: 12px 48px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .progress-bar-label { font-size: 12px; color: #888; white-space: nowrap; }
-  .progress-bar {
-    flex: 1; height: 4px; background: #333; border-radius: 2px; overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%; background: #4CAF50; border-radius: 2px;
-    transition: width 0.5s ease;
-  }
-  .progress-pct { font-size: 12px; color: #888; white-space: nowrap; }
-
-  /* MAIN */
-  .main { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
-
-  /* SECTION TITLE */
-  .section-intro {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin-bottom: 40px;
-    display: flex; gap: 20px; align-items: flex-start;
-  }
-  .section-intro-icon {
-    width: 48px; height: 48px; background: var(--black); border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px; flex-shrink: 0;
-  }
-  .section-intro h2 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-  .section-intro p { font-size: 14px; color: var(--mid); line-height: 1.6; }
-
-  /* CARDS */
-  .post-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    margin-bottom: 32px;
-    overflow: hidden;
-    transition: box-shadow 0.2s ease;
-  }
-  .post-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
-  .post-card.approved { border-color: #4CAF50; border-width: 2px; }
-  .post-card.rejected { border-color: #f44336; border-width: 2px; }
-
-  /* CARD HEADER */
-  .card-header {
-    padding: 20px 28px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-  .card-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-  .card-number {
-    width: 32px; height: 32px; background: var(--black); border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; color: white; flex-shrink: 0;
-  }
-  .card-title { font-size: 16px; font-weight: 700; }
-  .tag {
-    padding: 4px 12px; border-radius: 20px;
-    font-size: 12px; font-weight: 500;
-    border: 1px solid;
-  }
-  .tag-format { background: #F0F0F0; color: #444; border-color: #ddd; }
-  .tag-date { background: #EEF2FF; color: #4B6FD4; border-color: #C7D3F7; }
-
-  .status-badge {
-    padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
-    flex-shrink: 0;
-  }
-  .status-pending { background: var(--orange-light); color: var(--orange); }
-  .status-approved { background: var(--green-light); color: var(--green); }
-  .status-rejected { background: var(--red-light); color: var(--red); }
-
-  /* CARD BODY */
-  .card-body { padding: 28px; }
-
-  /* MEDIA SECTION */
-  .media-section { margin-bottom: 24px; }
-  .media-label {
-    font-size: 12px; font-weight: 700; color: var(--mid);
-    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
-  }
-  .media-grid {
-    display: flex; gap: 10px; flex-wrap: wrap;
-  }
-  .media-item {
-    position: relative; border-radius: 10px; overflow: hidden;
-    background: #f0f0f0; flex-shrink: 0;
-    cursor: pointer;
-  }
-  .media-item img, .media-item video {
-    display: block; width: 100%; height: 100%; object-fit: cover;
-  }
-  .media-single .media-item {
-    width: 240px; height: 296px;
-  }
-  .media-carousel .media-item {
-    width: 140px; height: 172px;
-  }
-  .media-carousel .media-item:first-child {
-    width: 200px; height: 246px;
-  }
-  .media-label-overlay {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    padding: 8px 10px; font-size: 11px; color: white; font-weight: 600;
-  }
-  .play-icon {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-    width: 44px; height: 44px; background: rgba(0,0,0,0.6); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; color: white; pointer-events: none;
-  }
-
-  /* CAPTION SECTION */
-  .caption-section {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
-  }
-  .caption-box { background: var(--gray); border-radius: 10px; padding: 16px 18px; }
-  .caption-lang {
-    font-size: 11px; font-weight: 700; color: var(--mid);
-    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .caption-text {
-    font-size: 14px; line-height: 1.7; color: #222; white-space: pre-line;
-  }
-  .caption-box-en { direction: ltr; }
-  .caption-box-en .caption-text { font-size: 14px; }
-
-  /* ACTION SECTION */
-  .action-section {
-    border-top: 1px solid var(--border);
-    padding: 20px 28px;
-    background: #FAFAFA;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    flex-wrap: wrap;
-  }
-  .action-question { font-size: 15px; font-weight: 600; color: #333; }
-  .action-buttons { display: flex; gap: 10px; align-items: center; }
-  .btn {
-    padding: 10px 24px; border-radius: 8px; border: none;
-    font-size: 14px; font-weight: 600; cursor: pointer;
-    font-family: 'Tajawal', sans-serif;
-    transition: all 0.15s ease;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .btn-approve {
-    background: var(--green); color: white;
-  }
-  .btn-approve:hover { background: #145522; transform: translateY(-1px); }
-  .btn-reject {
-    background: white; color: var(--red); border: 2px solid var(--red);
-  }
-  .btn-reject:hover { background: var(--red-light); transform: translateY(-1px); }
-  .btn-comment {
-    background: white; color: #555; border: 1px solid var(--border);
-  }
-  .btn-comment:hover { background: var(--gray); }
-  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-  /* COMMENT INPUT */
-  .comment-area {
-    display: none;
-    padding: 16px 28px 20px;
-    background: #FAFAFA;
-    border-top: 1px solid var(--border);
-  }
-  .comment-area.visible { display: block; }
-  .comment-input {
-    width: 100%; padding: 12px 16px;
-    border: 1px solid var(--border); border-radius: 8px;
-    font-family: 'Tajawal', sans-serif; font-size: 14px; resize: vertical;
-    min-height: 80px; direction: rtl;
-    transition: border-color 0.15s;
-  }
-  .comment-input:focus { outline: none; border-color: var(--black); }
-  .comment-submit {
-    margin-top: 10px;
-    padding: 8px 20px; background: var(--black); color: white;
-    border: none; border-radius: 6px; font-family: 'Tajawal', sans-serif;
-    font-size: 13px; font-weight: 600; cursor: pointer;
-    transition: background 0.15s;
-  }
-  .comment-submit:hover { background: #333; }
-
-  /* APPROVED STATE */
-  .approved-banner {
-    display: none;
-    padding: 16px 28px;
-    background: var(--green-light);
-    border-top: 2px solid #4CAF50;
-    align-items: center; gap: 10px;
-    font-size: 14px; font-weight: 600; color: var(--green);
-  }
-  .approved-banner.visible { display: flex; }
-
-  /* REJECTED STATE */
-  .rejected-banner {
-    display: none;
-    padding: 16px 28px;
-    background: var(--red-light);
-    border-top: 2px solid #f44336;
-    align-items: center; gap: 10px;
-    font-size: 14px; font-weight: 600; color: var(--red);
-  }
-  .rejected-banner.visible { display: flex; }
-
-  /* LIGHTBOX */
-  .lightbox {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.9); z-index: 999;
-    align-items: center; justify-content: center;
-  }
-  .lightbox.open { display: flex; }
-  .lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
-  .lightbox-inner img, .lightbox-inner video {
-    max-width: 90vw; max-height: 85vh; border-radius: 8px; display: block;
-  }
-  .lightbox-close {
-    position: absolute; top: -40px; left: 0;
-    color: white; font-size: 28px; cursor: pointer;
-    background: none; border: none; line-height: 1;
-  }
-
-  /* FOOTER */
-  .footer {
-    text-align: center; padding: 40px; color: var(--mid); font-size: 13px;
-  }
-
-  /* TOAST */
-  .toast {
-    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-    background: var(--black); color: white; padding: 14px 28px;
-    border-radius: 30px; font-size: 14px; font-weight: 600;
-    opacity: 0; transition: opacity 0.3s; z-index: 1000;
-    pointer-events: none;
-  }
-  .toast.show { opacity: 1; }
-
-  @media (max-width: 600px) {
-    .header { padding: 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
-    .progress-bar-wrap { padding: 10px 20px; }
-    .main { padding: 20px 16px 60px; }
-    .card-body { padding: 20px; }
-    .caption-section { grid-template-columns: 1fr; }
-    .action-section { flex-direction: column; align-items: flex-start; }
-    .media-single .media-item { width: 180px; height: 222px; }
-    .media-carousel .media-item { width: 110px; height: 136px; }
-  }
-
-  /* GRID SECTION */
-  .grid-section {
-    background: white;
-    border-top: 2px solid #E0E0E0;
-    padding-bottom: 60px;
-  }
-  .grid-header { background: #0A0A0A; }
-  .grid-header-inner {
-    max-width: 900px; margin: 0 auto;
-    padding: 24px; display: flex;
-    align-items: center; justify-content: space-between;
-  }
-  .grid-profile { display: flex; align-items: center; gap: 14px; }
-  .grid-avatar {
-    width: 44px; height: 44px; background: white; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: 15px; color: #0A0A0A;
-  }
-  .grid-username { font-size: 15px; font-weight: 700; color: white; }
-  .grid-bio { font-size: 12px; color: #aaa; margin-top: 2px; }
-  .grid-title-label { font-size: 13px; color: #888; border: 1px solid #333; padding: 6px 16px; border-radius: 20px; }
-  .grid-note {
-    max-width: 900px; margin: 0 auto; padding: 14px 24px;
-    font-size: 12px; color: #888; background: #FAFAFA;
-    border-bottom: 1px solid #E0E0E0; direction: rtl;
-  }
-  .grid-container {
-    max-width: 900px; margin: 3px auto 0; padding: 0 24px;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
-  }
-  .grid-item {
-    position: relative; aspect-ratio: 1;
-    background: #f0f0f0; overflow: hidden; cursor: pointer;
-  }
-  .grid-item img, .grid-item video {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform 0.3s ease;
-  }
-  .grid-item:hover img, .grid-item:hover video { transform: scale(1.04); }
-  .grid-item-date {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 20px 8px 6px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.65));
-    font-size: 11px; color: white; font-weight: 600; text-align: center;
-    opacity: 0; transition: opacity 0.2s;
-  }
-  .grid-item:hover .grid-item-date { opacity: 1; }
-  .grid-item-format {
-    position: absolute; top: 7px; left: 7px;
-    background: rgba(0,0,0,0.55); border-radius: 4px;
-    padding: 2px 7px; font-size: 10px; color: white; font-weight: 600;
-  }
-  .grid-placeholder {
-    width: 100%; height: 100%; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 8px; color: #bbb; font-size: 11px; background: #f8f8f8;
-  }
-  .grid-placeholder-icon { font-size: 24px; }
-  @media (max-width: 600px) {
-    .grid-container { padding: 0 4px; gap: 2px; }
-  }
+:root{--black:#0A0A0A;--white:#fff;--gray:#F5F5F5;--mid:#888;--border:#E0E0E0;--green:#1A6B2A;--green-light:#E8F5EC;--red:#8B1A1A;--red-light:#FDEAEA;--orange:#E67E22;--orange-light:#FEF3E8;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Tajawal',sans-serif;background:var(--gray);color:var(--black);direction:rtl;}
+.header{background:var(--black);color:#fff;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.3);}
+.header-brand{display:flex;align-items:center;gap:16px;}
+.header-logo{width:48px;height:48px;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:var(--black);}
+.header-title h1{font-size:20px;font-weight:700;}
+.header-title p{font-size:13px;color:#aaa;margin-top:2px;}
+.header-stats{display:flex;gap:24px;align-items:center;}
+.stat{text-align:center;}.stat-num{font-size:24px;font-weight:800;color:#fff;}.stat-label{font-size:11px;color:#888;margin-top:2px;}
+.stat-approved{color:#4CAF50;}.stat-pending{color:#FF9800;}
+.progress-bar-wrap{background:#1a1a1a;padding:12px 48px;display:flex;align-items:center;gap:16px;}
+.progress-bar-label{font-size:12px;color:#888;white-space:nowrap;}
+.progress-bar{flex:1;height:4px;background:#333;border-radius:2px;overflow:hidden;}
+.progress-bar-fill{height:100%;background:#4CAF50;border-radius:2px;transition:width .5s ease;}
+.progress-pct{font-size:12px;color:#888;white-space:nowrap;}
+.main{max-width:900px;margin:0 auto;padding:40px 24px 80px;}
+.section-intro{background:#fff;border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:40px;display:flex;gap:20px;align-items:flex-start;}
+.section-intro-icon{width:48px;height:48px;background:var(--black);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.section-intro h2{font-size:18px;font-weight:700;margin-bottom:6px;}
+.section-intro p{font-size:14px;color:var(--mid);line-height:1.6;}
+.post-card{background:#fff;border:1px solid var(--border);border-radius:16px;margin-bottom:32px;overflow:hidden;transition:box-shadow .2s ease;}
+.post-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.08);}
+.post-card.approved{border-color:#4CAF50;border-width:2px;}
+.post-card.rejected{border-color:#f44336;border-width:2px;}
+.card-header{padding:20px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.card-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.card-number{width:32px;height:32px;background:var(--black);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;}
+.card-title{font-size:16px;font-weight:700;}
+.tag{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid;}
+.tag-format{background:#F0F0F0;color:#444;border-color:#ddd;}
+.tag-date{background:#EEF2FF;color:#4B6FD4;border-color:#C7D3F7;}
+.status-badge{padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;flex-shrink:0;}
+.status-pending{background:var(--orange-light);color:var(--orange);}
+.status-approved{background:var(--green-light);color:var(--green);}
+.status-rejected{background:var(--red-light);color:var(--red);}
+.card-body{padding:28px;}
+.media-section{margin-bottom:24px;}
+.media-label{font-size:12px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+.media-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.media-item{position:relative;border-radius:10px;overflow:hidden;background:#f0f0f0;flex-shrink:0;cursor:pointer;}
+.media-item img,.media-item video{display:block;width:100%;height:100%;object-fit:cover;}
+.media-single .media-item{width:240px;height:296px;}
+.media-carousel .media-item{width:140px;height:172px;}
+.media-carousel .media-item:first-child{width:200px;height:246px;}
+.media-label-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:8px 10px;font-size:11px;color:#fff;font-weight:600;}
+.play-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;background:rgba(0,0,0,.6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;pointer-events:none;}
+.caption-section{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.caption-box{background:var(--gray);border-radius:10px;padding:16px 18px;}
+.caption-lang{font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.caption-text{font-size:14px;line-height:1.7;color:#222;white-space:pre-line;}
+.caption-box-en{direction:ltr;}
+.action-section{border-top:1px solid var(--border);padding:20px 28px;background:#FAFAFA;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.action-question{font-size:15px;font-weight:600;color:#333;}
+.action-buttons{display:flex;gap:10px;align-items:center;}
+.btn{padding:10px 24px;border-radius:8px;border:none;font-size:14px;font-weight:600;cursor:pointer;font-family:'Tajawal',sans-serif;transition:all .15s ease;display:flex;align-items:center;gap:6px;}
+.btn-approve{background:var(--green);color:#fff;}
+.btn-approve:hover{background:#145522;transform:translateY(-1px);}
+.btn-reject{background:#fff;color:var(--red);border:2px solid var(--red);}
+.btn-reject:hover{background:var(--red-light);transform:translateY(-1px);}
+.comment-area{display:none;padding:16px 28px 20px;background:#FAFAFA;border-top:1px solid var(--border);}
+.comment-area.visible{display:block;}
+.comment-input{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-family:'Tajawal',sans-serif;font-size:14px;resize:vertical;min-height:80px;direction:rtl;}
+.comment-input:focus{outline:none;border-color:var(--black);}
+.comment-submit{margin-top:10px;padding:8px 20px;background:var(--black);color:#fff;border:none;border-radius:6px;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+.approved-banner{display:none;padding:16px 28px;background:var(--green-light);border-top:2px solid #4CAF50;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--green);}
+.approved-banner.visible{display:flex;}
+.rejected-banner{display:none;padding:16px 28px;background:var(--red-light);border-top:2px solid #f44336;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--red);}
+.rejected-banner.visible{display:flex;}
+.grid-section{background:#fff;border-top:2px solid var(--border);padding-bottom:60px;}
+.grid-header{background:var(--black);}
+.grid-header-inner{max-width:900px;margin:0 auto;padding:24px;display:flex;align-items:center;justify-content:space-between;}
+.grid-profile{display:flex;align-items:center;gap:14px;}
+.grid-avatar{width:44px;height:44px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:var(--black);}
+.grid-username{font-size:15px;font-weight:700;color:#fff;}
+.grid-bio{font-size:12px;color:#aaa;margin-top:2px;}
+.grid-title-label{font-size:13px;color:#888;border:1px solid #333;padding:6px 16px;border-radius:20px;}
+.grid-note{max-width:900px;margin:0 auto;padding:14px 24px;font-size:12px;color:var(--mid);background:#FAFAFA;border-bottom:1px solid var(--border);direction:rtl;}
+.grid-container{max-width:900px;margin:3px auto 0;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.grid-item{position:relative;aspect-ratio:1;background:#f0f0f0;overflow:hidden;cursor:pointer;}
+.grid-item img,.grid-item video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease;}
+.grid-item:hover img,.grid-item:hover video{transform:scale(1.04);}
+.grid-item-date{position:absolute;bottom:0;left:0;right:0;padding:20px 8px 6px;background:linear-gradient(transparent,rgba(0,0,0,.65));font-size:11px;color:#fff;font-weight:600;text-align:center;opacity:0;transition:opacity .2s;}
+.grid-item:hover .grid-item-date{opacity:1;}
+.grid-item-format{position:absolute;top:7px;left:7px;background:rgba(0,0,0,.55);border-radius:4px;padding:2px 7px;font-size:10px;color:#fff;font-weight:600;}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;align-items:center;justify-content:center;}
+.lightbox.open{display:flex;}
+.lightbox-inner{position:relative;max-width:90vw;max-height:90vh;}
+.lightbox-inner img,.lightbox-inner video{max-width:90vw;max-height:85vh;border-radius:8px;display:block;}
+.lightbox-close{position:absolute;top:-40px;left:0;color:#fff;font-size:28px;cursor:pointer;background:none;border:none;line-height:1;}
+.footer{text-align:center;padding:40px;color:var(--mid);font-size:13px;}
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:var(--black);color:#fff;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:600;opacity:0;transition:opacity .3s;z-index:1000;pointer-events:none;}
+.toast.show{opacity:1;}
+@media(max-width:600px){.header{padding:20px;flex-direction:column;align-items:flex-start;gap:16px;}.progress-bar-wrap{padding:10px 20px;}.main{padding:20px 16px 60px;}.card-body{padding:20px;}.caption-section{grid-template-columns:1fr;}.action-section{flex-direction:column;align-items:flex-start;}.media-single .media-item{width:180px;height:222px;}.media-carousel .media-item{width:110px;height:136px;}.grid-container{padding:0 4px;gap:2px;}}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-brand">
     <div class="header-logo">S7</div>
     <div class="header-title">
-      <h1>سوق ٧ — مراجعة المحتوى</h1>
+      <h1>سوق ٧ - مراجعة المحتوى</h1>
       <p>مايو ٢٠٢٦ &nbsp;·&nbsp; <span id="review-date"></span></p>
     </div>
   </div>
   <div class="header-stats">
-    <div class="stat">
-      <div class="stat-num" id="total-count">7</div>
-      <div class="stat-label">منشور</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num stat-approved" id="approved-count">0</div>
-      <div class="stat-label">موافق</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num stat-pending" id="pending-count">7</div>
-      <div class="stat-label">بانتظار</div>
-    </div>
+    <div class="stat"><div class="stat-num" id="total-count">7</div><div class="stat-label">منشور</div></div>
+    <div class="stat"><div class="stat-num stat-approved" id="approved-count">0</div><div class="stat-label">موافق</div></div>
+    <div class="stat"><div class="stat-num stat-pending" id="pending-count">7</div><div class="stat-label">بانتظار</div></div>
   </div>
 </div>
-
 <div class="progress-bar-wrap">
   <span class="progress-bar-label">تقدم المراجعة</span>
   <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
   <span class="progress-pct" id="progress-pct">0%</span>
 </div>
-
 <div class="main">
-
   <div class="section-intro">
-    <div class="section-intro-icon">📋</div>
+    <div class="section-intro-icon">&#x1F4CB;</div>
     <div>
       <h2>تعليمات المراجعة</h2>
-      <p>يرجى مراجعة كل منشور بالضغط على زر <strong>موافق</strong> أو <strong>تعديل</strong>. في حال التعديل، يمكن إضافة ملاحظة توضح المطلوب. ستصل موافقتك أو ملاحظاتك مباشرة لفريق بيوند.</p>
+      <p>يرجى مراجعة كل منشور بالضغط على زر <strong>موافق</strong> أو <strong>تعديل</strong>. في حال التعديل، يمكن إضافة ملاحظة توضح المطلوب.</p>
     </div>
   </div>
-
-  <!-- POSTS will be injected here -->
   <div id="posts-container"></div>
-
 </div>
-
-
-<!-- INSTAGRAM GRID PREVIEW -->
 <div class="grid-section">
   <div class="grid-header">
     <div class="grid-header-inner">
       <div class="grid-profile">
         <div class="grid-avatar">S7</div>
-        <div class="grid-profile-info">
-          <div class="grid-username">souq7.sa</div>
-          <div class="grid-bio">كل شي في سوق الكل 🛍️</div>
-        </div>
+        <div><div class="grid-username">souq7.sa</div><div class="grid-bio">كل شي في سوق الكل</div></div>
       </div>
-      <div class="grid-title-label">معاينة الفيد — مايو ٢٠٢٦</div>
+      <div class="grid-title-label">معاينة الفيد - مايو ٢٠٢٦</div>
     </div>
   </div>
-  <div class="grid-note">الترتيب حسب تاريخ النشر، الأحدث في أعلى اليسار. الكاروسيل يظهر بالصورة الأولى فقط.</div>
+  <div class="grid-note">الترتيب حسب تاريخ النشر. الكاروسيل يظهر بالصورة الاولى فقط.</div>
   <div class="grid-container" id="instagram-grid"></div>
 </div>
-
-<div class="footer">بيوند — Beyound Agency &nbsp;·&nbsp; سوق ٧ × مايو ٢٠٢٦</div>
-
-<!-- LIGHTBOX -->
+<div class="footer">بيوند - Beyound Agency &nbsp;·&nbsp; سوق ٧ x مايو ٢٠٢٦</div>
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <div class="lightbox-inner" onclick="event.stopPropagation()">
-    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-close" onclick="closeLightbox()">X</button>
     <div id="lightbox-content"></div>
   </div>
 </div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
-
 <script>
-// ─── DATA ───────────────────────────────────────────────────────────────────
-const POSTS = [
-  {
-    id: "869d6kyp1",
-    number: 1,
-    title: "عالم لكل حاجة - أقسام سوق ٧",
-    format: "كاروسيل",
-    posting_date: "٢٩ مايو ٢٠٢٦",
-    caption_ar: "تعرف على سوق ٧ صح 🗺️\n٧ مناطق، كل منطقة عالم لحاله.\nكل شي في سوق الكل.",
-    caption_en: "Get to know Souq7 the right way 🗺️\n7 zones, each one a world of its own.\nEverything in a souq for everyone.",
-    media: [
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/d096eb76-4d80-485a-924b-a97af3b81c10/Final%2001.mp4", type: "video", label: "Cover" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/6ee8af54-f52d-450b-9184-95bb8223156b/Final%2002.gif", type: "gif", label: "شريحة ٢" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/2289b173-aa11-4435-b57f-e9f5418e8082/Final%2003.gif", type: "gif", label: "شريحة ٣" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/78a0d3c4-5d35-49ab-a34f-3d2a2a6e78dd/Final%2004.gif", type: "gif", label: "شريحة ٤" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/7f7e3bb0-38d7-4cff-a10c-f348d602bd42/Final%2006.gif", type: "gif", label: "شريحة ٦" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/3b690998-6fe5-43e2-8921-734acd75a36d/Final%2007.gif", type: "gif", label: "شريحة ٧" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/08d715db-d044-498d-9628-3d66d5329fc1/Final%2008.gif", type: "gif", label: "شريحة ٨" },
-    ]
-  },
-  {
-    id: "869d6kyhj",
-    number: 2,
-    title: "عيد الاضحى - عيدكم مبارك من سوق ٧",
-    format: "ستاتيك",
-    posting_date: "٢٧ مايو ٢٠٢٦",
-    caption_ar: "عيدكم مبارك وعساكم من عواده 🤍\nمن سوق ٧ للكل، كل عام وأنتم بخير.",
-    caption_en: "Eid Mubarak to you and your loved ones 🤍\nFrom Souq7 to everyone, Happy Eid.",
-    media: [
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/16ab0a3f-1c1a-4eab-bd88-2b8b49d850ef/Final%20Visual%2001.jpg", type: "image", label: "نسخة ١" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/8c20f167-c634-4863-90aa-0b170435e491/Final%20Visual%2002.png", type: "image", label: "نسخة ٢" },
-    ]
-  },
-  {
-    id: "869d6kyvb",
-    number: 3,
-    title: "موشن - أوقات الدوام",
-    format: "موشن",
-    posting_date: "٢١ مايو ٢٠٢٦",
-    caption_ar: "عشان تخطط زيارتك صح 🕐\nهذه أوقات دوام سوق ٧، احفظها عشان لا تنسى!",
-    caption_en: "Plan your visit right 🕐\nHere are Souq7's opening hours, save it so you don't forget.",
-    media: [
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/24aee5b5-cb00-4a9e-b3ac-5c8be4e4c54f/Final%20Visal.mp4", type: "video", label: "Final Visual" }
-    ]
-  },
-  {
-    id: "869d6kxwt",
-    number: 4,
-    title: "سوق ٧ - الوجهة اللي ناقصتك",
-    format: "كاروسيل",
-    posting_date: "٨ مايو ٢٠٢٦",
-    caption_ar: "سوق؟ ولا تجربة تسوق متكاملة؟\nأيش رأيكم؟ 👀",
-    caption_en: "Market? or a full shopping experience?\nWhat do you think? 👀",
-    media: [
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/7a1a82a1-395a-42f8-9387-7ba192713484/Final%2001.png", type: "image", label: "Final 01" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/cf36db38-54bc-4256-aff6-2f157ae54f05/Final%2002.png", type: "image", label: "Final 02" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/5d12f37f-abba-41bf-958a-6a28dc399200/Final%2003.png", type: "image", label: "Final 03" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/64940a18-4a13-4db3-a041-3508035648f3/Final%2004.png", type: "image", label: "Final 04" },
-    ]
-  },
-  {
-    id: "869d6ky9c",
-    number: 5,
-    title: "دليلك في سوق ٧ - ٥ أماكن لا تفوتك",
-    format: "كاروسيل",
-    posting_date: "١٥ مايو ٢٠٢٦",
-    caption_ar: "قبل ما تزور سوق ٧، احفظ هذا 📌\n٥ أماكن ما تفوتك، سويب وشوف 👉",
-    caption_en: "Before you visit Souq7, save this 📌\n5 spots you can't miss, swipe to see 👉",
-    media: [
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/eb258bad-e023-440e-a52d-d31afbaaf3e9/Final%2001.png", type: "image", label: "Final 01" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/e83e1459-6a76-43a3-b42e-2af7ec5da963/Final%2002.png", type: "image", label: "Final 02" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/9c5095e7-66f7-4e39-92c7-9d428590b3c0/Final%2003.png", type: "image", label: "Final 03" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/7eb49a48-8a7a-4bab-9255-3ae63ec67542/Final%2004.png", type: "image", label: "Final 04" },
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/5bb25e57-13cd-40df-82a7-13e88456b94d/Final%2005.png", type: "image", label: "Final 05" },
-    ]
-  },
-  {
-    id: "869d6kxhx",
-    number: 6,
-    title: "في دقيقة - كل شي في سوق الكل",
-    format: "ريل",
-    posting_date: "١٧ مايو ٢٠٢٦",
-    caption_ar: "في دقيقة، كل منطقة من مناطق سوق ٧\nتعال وشوف ضخامة السوق بعينك.",
-    caption_en: "In one minute, every zone of Souq7\nCome see it for yourself.",
-    media: [
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/84bb207d-5802-4061-8bb5-e07458948987/Final%20Visual.mp4", type: "video", label: "Final Visual" },
-    ]
-  },
-  {
-    id: "869dbgyhx",
-    number: 7,
-    title: "يوم عرفة",
-    format: "ستاتيك",
-    posting_date: "٢٦ مايو ٢٠٢٦",
-    caption_ar: "يوم عرفة\nأعظم أيام الدنيا، نسأل الله أن يتقبل منا صيامه ويتقبل من الحجاج حجهم.",
-    caption_en: "The Day of Arafah — the greatest day of the year.\nMay Allah accept our fast and bless every pilgrim on this blessed day.",
-    media: [
-      { url: "https://t25687846.p.clickup-attachments.com/t25687846/398d701d-5ccc-444a-972a-4c2f46ce9679/Final%20Visual.png", type: "image", label: "Final Visual" }
-    ]
-  }
-];
+var POSTS = [{"id": "869d6kxhx", "number": 1, "title": "في دقيقة - كل شي في سوق الكل", "format": "ريل", "posting_date": "الأحد ٢٥ مايو 10:00 AM", "posting_date_ts": 1779692400000, "caption_ar": "في دقيقة، كل منطقة من مناطق سوق7\nتعال وشوف ضخامة السوق بعينك.", "caption_en": "In one minute, every zone of Souq7\nCome see it for yourself.", "media": [{"url": "https://t25687846.p.clickup-attachments.com/t25687846/17b4dd78-9d5f-4dfe-ae1f-e760d575c5bc/Final%20Visual.mp4", "type": "video", "label": "Final Visual"}]}, {"id": "869dbgyhx", "number": 2, "title": "يوم عرفة", "format": "ستاتيك", "posting_date": "الاثنين ٢٦ مايو 10:00 AM", "posting_date_ts": 1779778800000, "caption_ar": "يوم عرفة أعظم أيام الدنيا، نسأل الله أن يتقبل منا صيامه ويتقبل من الحجاج حجهم.", "caption_en": "The Day of Arafah, the greatest day of the year. May Allah accept our fast and bless every pilgrim on this blessed day.", "media": [{"url": "https://t25687846.p.clickup-attachments.com/t25687846/13fbc869-8f12-4a47-971c-f3526c6a1397/Final%2001.png", "type": "image", "label": "Final 01"}]}, {"id": "869d6kyhj", "number": 3, "title": "عيد الاضحى - عيدكم مبارك", "format": "ستاتيك", "posting_date": "الاثنين ٢٦ مايو 08:00 PM", "posting_date_ts": 1779814800000, "caption_ar": "عيدكم مبارك وعساكم من عواده\nمن سوق7 للكل، كل عام وأنتم بخير.", "caption_en": "Eid Mubarak to you and your loved ones\nFrom Souq7 to everyone, Happy Eid.", "media": [{"url": "https://t25687846.p.clickup-attachments.com/t25687846/892c7153-28ba-4811-a30f-926e10f90605/01%20Final%20Visual%20IG.png", "type": "image", "label": "01 IG"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/ba987f23-aa40-45c1-98a9-cdb4b99491fd/02%20Final%20Visual%20Linkedin%20%26%20X.png", "type": "image", "label": "02 LinkedIn"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/3ea349f6-6a27-48da-b460-66121b34396e/03%20Final%20Visual%20Working%20Hours.png", "type": "image", "label": "03 Working Hours"}]}, {"id": "869d6kyp1", "number": 4, "title": "عالم لكل حاجة - أقسام سوق ٧", "format": "كاروسيل", "posting_date": "الثلاثاء ٢٧ مايو 05:00 PM", "posting_date_ts": 1779890400000, "caption_ar": "تعرف على سوق7 صح\n٧ مناطق، كل منطقة عالم لحاله.\nكل شي في سوق الكل.", "caption_en": "Get to know Souq7 the right way\n7 zones, each one a world of its own.\nEverything in The souq for everyone.", "media": [{"url": "https://t25687846.p.clickup-attachments.com/t25687846/87792b4d-1544-46e7-8f67-4cbfb8d0dc9a/Final%2001.mp4", "type": "video", "label": "Final 01"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/30ec062e-79d6-4d6f-9454-f83083f2bb13/Final%2002.mp4", "type": "video", "label": "Final 02"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/b66cccc4-f953-4d80-b792-8ba69db35102/Final%2003.mp4", "type": "video", "label": "Final 03"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/38b35eae-687b-4be4-94ad-c316d00533fe/Final%2004.mp4", "type": "video", "label": "Final 04"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/8c3ecb0d-66a0-4798-b255-0b2587a92d49/Final%2005.mp4", "type": "video", "label": "Final 05"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/8a33f0d0-5f56-4f4f-a337-d61b50712996/Final%2006.mp4", "type": "video", "label": "Final 06"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/f9e6e41e-62c7-4347-a229-daada6790df3/Final%2007.mp4", "type": "video", "label": "Final 07"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/f9e4cc63-b1af-45f4-a8a2-d9158c65b0b4/Final%2008.mp4", "type": "video", "label": "Final 08"}]}, {"id": "869d6ky9c", "number": 5, "title": "دليلك في سوق ٧ - ٥ أماكن لا تفوتك", "format": "كاروسيل", "posting_date": "الأربعاء ٢٨ مايو 02:00 PM", "posting_date_ts": 1779966000000, "caption_ar": "قبل ما تزور سوق7، احفظ هذا\n٥ أماكن ما تفوتك، سويب وشوف", "caption_en": "Before you visit Souq7, save this\n5 spots you can not miss, swipe to see", "media": [{"url": "https://t25687846.p.clickup-attachments.com/t25687846/2584ab01-fd1a-456e-9748-9a7195330dc0/Final%2001.png", "type": "image", "label": "Final 01"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/3e468fff-364d-471d-b62b-f0074e15c05f/Final%2002.png", "type": "image", "label": "Final 02"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/d44b05eb-d491-486e-83c8-98e9e399b866/Final%2003.png", "type": "image", "label": "Final 03"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/066ea3d7-825e-4512-af15-8e0aaf7cde69/Final%2004.png", "type": "image", "label": "Final 04"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/d7ec9232-e600-4a52-a485-32400351af92/Final%2005.png", "type": "image", "label": "Final 05"}]}, {"id": "869d6kxwt", "number": 6, "title": "سوق ٧ - الوجهة اللي ناقصتك", "format": "كاروسيل", "posting_date": "الخميس ٢٩ مايو 04:00 PM", "posting_date_ts": 1780059600000, "caption_ar": "سبع عوالم اجتمعت في سوق واحد لتصنع تجربة تسوق استثنائية.", "caption_en": "Where seven worlds meet to create an exceptional shopping experience.", "media": [{"url": "https://t25687846.p.clickup-attachments.com/t25687846/1802017c-5337-4faa-891e-c20cc594f867/Final%2001.png", "type": "image", "label": "Final 01"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/0798336c-bc1b-4603-beba-16714f505c7c/Final%2002.png", "type": "image", "label": "Final 02"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/b4bacf76-4767-43fa-8524-0500eb301a08/Final%2003.png", "type": "image", "label": "Final 03"}, {"url": "https://t25687846.p.clickup-attachments.com/t25687846/9e324de9-32c8-44e9-ba03-a8cd97d8e668/Final%2004.png", "type": "image", "label": "Final 04"}]}, {"id": "869d6kyvb", "number": 7, "title": "موشن - أوقات الدوام", "format": "موشن", "posting_date": "السبت ٣١ مايو 05:00 PM", "posting_date_ts": 1780236000000, "caption_ar": "عشان تخطط زيارتك صح\nهذه أوقات دوام سوق7، احفظها عشان لا تنسى!", "caption_en": "Plan your visit right\nHere are Souq7 opening hours, save it so you do not forget.", "media": [{"url": "https://t25687846.p.clickup-attachments.com/t25687846/26b5e2eb-1550-48a9-95e4-6ff7afc5d2f0/Final%20Visual.mp4", "type": "video", "label": "Final Visual"}]}];
 
-// ─── CLICKUP API ─────────────────────────────────────────────────────────────
-const CLICKUP_API = "https://api.anthropic.com/v1/messages";
+var state = {};
+POSTS.forEach(function(p){ state[p.id] = { status: "pending", comment: "" }; });
 
-async function sendApprovalToClickUp(taskId, message) {
-  // Since we can't call ClickUp directly from browser, we'll show the status
-  // and instruct to send comment via API
-  return true;
+function getReviewedCount(){ return Object.values(state).filter(function(s){ return s.status !== "pending"; }).length; }
+function getApprovedCount(){ return Object.values(state).filter(function(s){ return s.status === "approved"; }).length; }
+
+function updateStats(){
+  var approved = getApprovedCount();
+  var reviewed = getReviewedCount();
+  var total = POSTS.length;
+  var pct = Math.round((reviewed / total) * 100);
+  document.getElementById("approved-count").textContent = approved;
+  document.getElementById("pending-count").textContent = total - reviewed;
+  document.getElementById("progress-fill").style.width = pct + "%";
+  document.getElementById("progress-pct").textContent = pct + "%";
 }
 
-// ─── STATE ───────────────────────────────────────────────────────────────────
-const state = {};
-POSTS.forEach(p => { state[p.id] = { status: 'pending', comment: '' }; });
-
-function getApprovedCount() {
-  return Object.values(state).filter(s => s.status === 'approved').length;
-}
-function getReviewedCount() {
-  return Object.values(state).filter(s => s.status !== 'pending').length;
-}
-
-function updateStats() {
-  const approved = getApprovedCount();
-  const reviewed = getReviewedCount();
-  const total = POSTS.length;
-  const pct = Math.round((reviewed / total) * 100);
-
-  document.getElementById('approved-count').textContent = approved;
-  document.getElementById('pending-count').textContent = total - reviewed;
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-pct').textContent = pct + '%';
-}
-
-// ─── TOAST ────────────────────────────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
+function showToast(msg){
+  var t = document.getElementById("toast");
   t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  t.classList.add("show");
+  setTimeout(function(){ t.classList.remove("show"); }, 3000);
 }
 
-// ─── LIGHTBOX ────────────────────────────────────────────────────────────────
-function openLightbox(url, type) {
-  const lb = document.getElementById('lightbox');
-  const content = document.getElementById('lightbox-content');
-  if (type === 'video') {
-    content.innerHTML = `<video src="${url}" controls autoplay style="max-width:85vw;max-height:80vh;border-radius:8px;"></video>`;
+function openLightbox(url, type){
+  var lb = document.getElementById("lightbox");
+  var content = document.getElementById("lightbox-content");
+  if(type === "video"){
+    content.innerHTML = "<video src=\"" + url + "\" controls autoplay style=\"max-width:85vw;max-height:80vh;border-radius:8px;\"></video>";
   } else {
-    content.innerHTML = `<img src="${url}" style="max-width:85vw;max-height:85vh;border-radius:8px;">`;
+    content.innerHTML = "<img src=\"" + url + "\" style=\"max-width:85vw;max-height:85vh;border-radius:8px;\">";
   }
-  lb.classList.add('open');
-}
-function closeLightbox() {
-  const lb = document.getElementById('lightbox');
-  lb.classList.remove('open');
-  document.getElementById('lightbox-content').innerHTML = '';
+  lb.classList.add("open");
 }
 
-// ─── APPROVE ─────────────────────────────────────────────────────────────────
-function approvePost(taskId) {
-  state[taskId].status = 'approved';
-  const card = document.getElementById('card-' + taskId);
-  card.classList.remove('rejected');
-  card.classList.add('approved');
+function closeLightbox(){
+  document.getElementById("lightbox").classList.remove("open");
+  document.getElementById("lightbox-content").innerHTML = "";
+}
 
-  const badge = document.getElementById('badge-' + taskId);
-  badge.className = 'status-badge status-approved';
-  badge.textContent = '✓ موافق';
-
-  const approvedBanner = document.getElementById('approved-banner-' + taskId);
-  const rejectedBanner = document.getElementById('rejected-banner-' + taskId);
-  approvedBanner.classList.add('visible');
-  rejectedBanner.classList.remove('visible');
-
-  document.getElementById('comment-area-' + taskId).classList.remove('visible');
-  document.getElementById('action-section-' + taskId).style.display = 'none';
-
+function approvePost(taskId){
+  state[taskId].status = "approved";
+  var card = document.getElementById("card-" + taskId);
+  card.classList.add("approved");
+  document.getElementById("badge-" + taskId).className = "status-badge status-approved";
+  document.getElementById("badge-" + taskId).textContent = "موافق";
+  document.getElementById("approved-banner-" + taskId).classList.add("visible");
+  document.getElementById("rejected-banner-" + taskId).classList.remove("visible");
+  document.getElementById("comment-area-" + taskId).classList.remove("visible");
+  document.getElementById("action-section-" + taskId).style.display = "none";
   updateStats();
-  showToast('✓ تمت الموافقة — سيصل إشعار لفريق بيوند');
-
-  // Log approval
-  console.log(`APPROVAL: Task ${taskId} approved at ${new Date().toISOString()}`);
+  showToast("تمت الموافقة");
 }
 
-// ─── REJECT ──────────────────────────────────────────────────────────────────
-function requestRevision(taskId) {
-  const commentArea = document.getElementById('comment-area-' + taskId);
-  commentArea.classList.toggle('visible');
-  if (commentArea.classList.contains('visible')) {
-    document.getElementById('comment-' + taskId).focus();
+function requestRevision(taskId){
+  var area = document.getElementById("comment-area-" + taskId);
+  area.classList.toggle("visible");
+  if(area.classList.contains("visible")){
+    document.getElementById("comment-" + taskId).focus();
   }
 }
 
-function submitRevision(taskId) {
-  const comment = document.getElementById('comment-' + taskId).value.trim();
-  if (!comment) {
-    showToast('يرجى كتابة ملاحظتك أولاً');
-    return;
-  }
-
-  state[taskId].status = 'rejected';
-  state[taskId].comment = comment;
-
-  const card = document.getElementById('card-' + taskId);
-  card.classList.remove('approved');
-  card.classList.add('rejected');
-
-  const badge = document.getElementById('badge-' + taskId);
-  badge.className = 'status-badge status-rejected';
-  badge.textContent = '⟳ يحتاج تعديل';
-
-  const approvedBanner = document.getElementById('approved-banner-' + taskId);
-  const rejectedBanner = document.getElementById('rejected-banner-' + taskId);
-  rejectedBanner.querySelector('.rejection-comment').textContent = '"' + comment + '"';
-  rejectedBanner.classList.add('visible');
-  approvedBanner.classList.remove('visible');
-
-  document.getElementById('comment-area-' + taskId).classList.remove('visible');
-  document.getElementById('action-section-' + taskId).style.display = 'none';
-
+function submitRevision(taskId){
+  var comment = document.getElementById("comment-" + taskId).value.trim();
+  if(!comment){ showToast("يرجى كتابة ملاحظتك أولا"); return; }
+  state[taskId].status = "rejected";
+  var card = document.getElementById("card-" + taskId);
+  card.classList.add("rejected");
+  document.getElementById("badge-" + taskId).className = "status-badge status-rejected";
+  document.getElementById("badge-" + taskId).textContent = "يحتاج تعديل";
+  var rb = document.getElementById("rejected-banner-" + taskId);
+  rb.querySelector(".rejection-comment").textContent = comment;
+  rb.classList.add("visible");
+  document.getElementById("approved-banner-" + taskId).classList.remove("visible");
+  document.getElementById("comment-area-" + taskId).classList.remove("visible");
+  document.getElementById("action-section-" + taskId).style.display = "none";
   updateStats();
-  showToast('📝 تم إرسال ملاحظتك لفريق بيوند');
-
-  console.log(`REVISION: Task ${taskId} | Comment: ${comment}`);
+  showToast("تم ارسال ملاحظتك لفريق بيوند");
 }
 
-// ─── RENDER ──────────────────────────────────────────────────────────────────
-function renderMedia(post) {
-  if (!post.media || post.media.length === 0) {
-    return `<div style="background:#f5f5f5;border-radius:10px;padding:20px;text-align:center;color:#aaa;font-size:13px;">
-      📎 لم يتم رفع الملف النهائي بعد
-    </div>`;
+function renderMedia(post){
+  if(!post.media || post.media.length === 0){
+    return "<div style=\"background:#f5f5f5;border-radius:10px;padding:20px;text-align:center;color:#aaa;font-size:13px;\">لم يتم رفع الملف النهائي بعد</div>";
   }
-
-  const isCarousel = post.media.length > 1;
-  const gridClass = isCarousel ? 'media-carousel' : 'media-single';
-
-  const items = post.media.map((m, i) => {
-    const isVideo = m.type === 'video' || m.type === 'gif';
-    const clickFn = `openLightbox('${m.url}', '${m.type}')`;
-
-    if (m.type === 'video') {
-      return `<div class="media-item" onclick="${clickFn}">
-        <video src="${m.url}" muted preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>
-        <div class="play-icon">▶</div>
-        <div class="media-label-overlay">${m.label}</div>
-      </div>`;
-    } else if (m.type === 'gif') {
-      return `<div class="media-item" onclick="${clickFn}">
-        <img src="${m.url}" alt="${m.label}" loading="lazy">
-        <div class="media-label-overlay">${m.label}</div>
-      </div>`;
+  var isCarousel = post.media.length > 1;
+  var gridClass = isCarousel ? "media-carousel" : "media-single";
+  var items = post.media.map(function(m){
+    var clickFn = "openLightbox(\'" + m.url + "\',\'" + m.type + "\')";
+    if(m.type === "video"){
+      return "<div class=\"media-item\" onclick=\"" + clickFn + "\"><video src=\"" + m.url + "\" muted preload=\"metadata\" style=\"width:100%;height:100%;object-fit:cover;\"></video><div class=\"play-icon\">&#9654;</div><div class=\"media-label-overlay\">" + m.label + "</div></div>";
     } else {
-      return `<div class="media-item" onclick="${clickFn}">
-        <img src="${m.url}" alt="${m.label}" loading="lazy">
-        <div class="media-label-overlay">${m.label}</div>
-      </div>`;
+      return "<div class=\"media-item\" onclick=\"" + clickFn + "\"><img src=\"" + m.url + "\" alt=\"" + m.label + "\" loading=\"lazy\"><div class=\"media-label-overlay\">" + m.label + "</div></div>";
     }
-  }).join('');
-
-  return `<div class="media-grid ${gridClass}">${items}</div>`;
+  }).join("");
+  return "<div class=\"media-grid " + gridClass + "\">" + items + "</div>";
 }
 
-function renderPost(post) {
-  return `
-<div class="post-card" id="card-${post.id}">
-  <div class="card-header">
-    <div class="card-meta">
-      <div class="card-number">${post.number}</div>
-      <div class="card-title">${post.title}</div>
-      <span class="tag tag-format">${post.format}</span>
-      <span class="tag tag-date">📅 ${post.posting_date}</span>
-    </div>
-    <div class="status-badge status-pending" id="badge-${post.id}">بانتظار المراجعة</div>
-  </div>
-
-  <div class="card-body">
-    <div class="media-section">
-      <div class="media-label">المحتوى النهائي</div>
-      ${renderMedia(post)}
-    </div>
-
-    <div class="caption-section">
-      <div class="caption-box">
-        <div class="caption-lang">✍️ الكابشن العربي</div>
-        <div class="caption-text">${post.caption_ar}</div>
-      </div>
-      <div class="caption-box caption-box-en" dir="ltr">
-        <div class="caption-lang">✍️ English Caption</div>
-        <div class="caption-text">${post.caption_en}</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="action-section" id="action-section-${post.id}">
-    <div class="action-question">هل هذا المحتوى جاهز للنشر؟</div>
-    <div class="action-buttons">
-      <button class="btn btn-comment" onclick="requestRevision('${post.id}')">💬 أريد تعديل</button>
-      <button class="btn btn-approve" onclick="approvePost('${post.id}')">✓ موافق للنشر</button>
-    </div>
-  </div>
-
-  <div class="comment-area" id="comment-area-${post.id}">
-    <textarea class="comment-input" id="comment-${post.id}" placeholder="اكتب ملاحظتك هنا..."></textarea>
-    <button class="comment-submit" onclick="submitRevision('${post.id}')">إرسال الملاحظة</button>
-  </div>
-
-  <div class="approved-banner" id="approved-banner-${post.id}">
-    ✓ تمت الموافقة — شكراً
-  </div>
-  <div class="rejected-banner" id="rejected-banner-${post.id}">
-    📝 تم إرسال الملاحظة: <span class="rejection-comment" style="font-weight:400;margin-right:8px;"></span>
-  </div>
-</div>`;
+function renderPost(post){
+  return "<div class=\"post-card\" id=\"card-" + post.id + "\">" +
+    "<div class=\"card-header\"><div class=\"card-meta\">" +
+    "<div class=\"card-number\">" + post.number + "</div>" +
+    "<div class=\"card-title\">" + post.title + "</div>" +
+    "<span class=\"tag tag-format\">" + post.format + "</span>" +
+    "<span class=\"tag tag-date\">" + post.posting_date + "</span>" +
+    "</div><div class=\"status-badge status-pending\" id=\"badge-" + post.id + "\">بانتظار المراجعة</div></div>" +
+    "<div class=\"card-body\"><div class=\"media-section\"><div class=\"media-label\">المحتوى النهائي</div>" + renderMedia(post) + "</div>" +
+    "<div class=\"caption-section\">" +
+    "<div class=\"caption-box\"><div class=\"caption-lang\">الكابشن العربي</div><div class=\"caption-text\">" + post.caption_ar + "</div></div>" +
+    "<div class=\"caption-box caption-box-en\" dir=\"ltr\"><div class=\"caption-lang\">English Caption</div><div class=\"caption-text\">" + post.caption_en + "</div></div>" +
+    "</div></div>" +
+    "<div class=\"action-section\" id=\"action-section-" + post.id + "\"><div class=\"action-question\">هل هذا المحتوى جاهز للنشر؟</div>" +
+    "<div class=\"action-buttons\"><button class=\"btn btn-reject\" onclick=\"requestRevision('" + post.id + "')\">اريد تعديل</button>" +
+    "<button class=\"btn btn-approve\" onclick=\"approvePost('" + post.id + "')\">موافق للنشر</button></div></div>" +
+    "<div class=\"comment-area\" id=\"comment-area-" + post.id + "\"><textarea class=\"comment-input\" id=\"comment-" + post.id + "\" placeholder=\"اكتب ملاحظتك هنا...\"></textarea>" +
+    "<button class=\"comment-submit\" onclick=\"submitRevision('" + post.id + "')\">ارسال الملاحظة</button></div>" +
+    "<div class=\"approved-banner\" id=\"approved-banner-" + post.id + "\">تمت الموافقة - شكرا</div>" +
+    "<div class=\"rejected-banner\" id=\"rejected-banner-" + post.id + "\">الملاحظة: <span class=\"rejection-comment\" style=\"font-weight:400;margin-right:8px;\"></span></div>" +
+    "</div>";
 }
 
-
-// ─── INSTAGRAM GRID ──────────────────────────────────────────────────────────
-function buildGrid() {
-  // Sort posts by posting date (earliest first = newest in grid top-left for Instagram)
-  const dateMap = {
-    "869d6kxwt": new Date("2026-05-08"),
-    "869d6ky9c": new Date("2026-05-15"),
-    "869d6kxhx": new Date("2026-05-17"),
-    "869d6kyvb": new Date("2026-05-21"),
-    "869d6kyp1": new Date("2026-05-29"),
-    "869d6kyhj": new Date("2026-05-27"),
-    "869dbgyhx": new Date("2026-05-26"),
-  };
-
-  const sorted = [...POSTS].sort((a, b) => dateMap[a.id] - dateMap[b.id]);
-
-  const grid = document.getElementById('instagram-grid');
-  grid.innerHTML = sorted.map(post => {
-    const firstMedia = post.media && post.media.length > 0 ? post.media[0] : null;
-    const isCarousel = post.media && post.media.length > 1;
-    const isVideo = firstMedia && (firstMedia.type === 'video');
-    const isGif = firstMedia && firstMedia.type === 'gif';
-
-    let mediaHtml = '';
-    if (!firstMedia) {
-      mediaHtml = `<div class="grid-placeholder">
-        <div class="grid-placeholder-icon">🖼️</div>
-        <div>لم يُرفع بعد</div>
-      </div>`;
-    } else if (isVideo) {
-      mediaHtml = `<video src="${firstMedia.url}" muted preload="metadata"></video>`;
+function buildGrid(){
+  var sorted = POSTS.slice().sort(function(a,b){ return a.posting_date_ts - b.posting_date_ts; });
+  var grid = document.getElementById("instagram-grid");
+  grid.innerHTML = sorted.map(function(post){
+    var firstMedia = post.media && post.media.length > 0 ? post.media[0] : null;
+    var isCarousel = post.media && post.media.length > 1;
+    var isVideo = firstMedia && firstMedia.type === "video";
+    var mediaHtml = "";
+    if(!firstMedia){
+      mediaHtml = "<div style=\"width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:11px;background:#f8f8f8;\">لم يرفع</div>";
+    } else if(isVideo){
+      mediaHtml = "<video src=\"" + firstMedia.url + "\" muted preload=\"metadata\"></video>";
     } else {
-      mediaHtml = `<img src="${firstMedia.url}" alt="${post.title}" loading="lazy">`;
+      mediaHtml = "<img src=\"" + firstMedia.url + "\" alt=\"" + post.title + "\" loading=\"lazy\">";
     }
-
-    const formatIcon = isCarousel ? '⊞' : isVideo ? '▶' : '';
-    const dateObj = dateMap[post.id];
-    const dateLabel = dateObj ? dateObj.toLocaleDateString('ar-SA', { day: 'numeric', month: 'short' }) : '';
-
-    return `<div class="grid-item" onclick="openLightbox('${firstMedia ? firstMedia.url : ''}', '${firstMedia ? firstMedia.type : 'image'}')">
-      ${mediaHtml}
-      ${formatIcon ? `<div class="grid-item-format">${formatIcon}</div>` : ''}
-      <div class="grid-item-date">${post.title.split(' - ')[0]} · ${dateLabel}</div>
-    </div>`;
-  }).join('');
+    var fmt = isCarousel ? "carousel" : isVideo ? "video" : "";
+    var clickFn = firstMedia ? "openLightbox(\'" + firstMedia.url + "\',\'" + firstMedia.type + "\')" : "";
+    return "<div class=\"grid-item\" onclick=\"" + clickFn + "\">" + mediaHtml +
+      (fmt ? "<div class=\"grid-item-format\">" + (isCarousel ? "&#x229E;" : "&#9654;") + "</div>" : "") +
+      "<div class=\"grid-item-date\">" + post.posting_date + "</div></div>";
+  }).join("");
 }
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const now = new Date();
-  document.getElementById('review-date').textContent =
-    now.toLocaleDateString('ar-SA', { year: 'numeric', month: 'long', day: 'numeric' });
 
-  const container = document.getElementById('posts-container');
-  container.innerHTML = POSTS.map(renderPost).join('');
-
+document.addEventListener("DOMContentLoaded", function(){
+  var now = new Date();
+  document.getElementById("review-date").textContent = now.toLocaleDateString("ar-SA", { year:"numeric", month:"long", day:"numeric" });
+  document.getElementById("posts-container").innerHTML = POSTS.map(renderPost).join("");
   updateStats();
   buildGrid();
 });
+
 </script>
 </body>
 </html>
